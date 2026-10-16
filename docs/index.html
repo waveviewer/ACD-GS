@@ -61,9 +61,9 @@
     </nav>
     <div class="nav-actions">
       <a class="btn btn-ghost btn-sm is-tbd" href="#" aria-disabled="true" tabindex="-1">arXiv (TBD)</a>
-      <a class="btn btn-dark btn-sm is-tbd" href="#" aria-disabled="true" tabindex="-1">
+      <a class="btn btn-dark btn-sm" href="https://github.com/waveviewer/ACD-GS.git">
         <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.17c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.66.41.35.78 1.05.78 2.12v3.14c0 .3.2.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
-        Code (TBD)
+        Code
       </a>
     </div>
   </div>
@@ -98,9 +98,9 @@
           <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3h7.2c2.5 0 4.3 1.5 4.3 3.9 0 1.6-.8 2.8-2.2 3.4 1.8.5 2.9 1.9 2.9 3.9 0 2.7-2 4.3-5 4.3H6V3zm6.7 6.3c1.3 0 2.1-.7 2.1-1.9s-.8-1.9-2.1-1.9H8.9v3.8h3.8zm.5 6.6c1.5 0 2.4-.8 2.4-2.1s-.9-2.1-2.4-2.1H8.9v4.2h4.3z"/></svg>
           Paper (arXiv) (TBD)
         </a>
-        <a class="btn btn-dark is-tbd" href="#" aria-disabled="true" tabindex="-1">
+        <a class="btn btn-dark" href="https://github.com/waveviewer/ACD-GS.git">
           <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.17c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.66.41.35.78 1.05.78 2.12v3.14c0 .3.2.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
-          Code (TBD)
+          Code
         </a>
         <a class="btn btn-ghost is-tbd" href="#" aria-disabled="true" tabindex="-1">
           <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l11-6.5-11-6.5z"/></svg>
@@ -247,23 +247,12 @@
       <p class="kicker reveal">Dynamic Results</p>
       <h2 class="section-title reveal">Watch Gaussians grow where geometry demands</h2>
       <p class="lead reveal">
-        Renderings and density visualizations of ACD-GS against 3DGS and recent density-control baselines. Full demo
-        videos are hosted externally; click a card to watch (links to be announced).
+        Renderings and density visualizations of ACD-GS against 3DGS and recent density-control baselines. Click a card to enlarge the image and read its caption.
       </p>
 
-      <!-- EDIT-ME (2/3): demo videos are NOT stored in this repo. For each card
-           below: set the real external video URL on the <a class="media-frame ...">,
-           then remove the "is-tbd" class, aria-disabled and tabindex attributes,
-           and change the badge text from "Video: TBD" to e.g. "Watch video". -->
       <div class="demos">
-        <figure class="media-card reveal" style="--ar:2.37">
-          <a class="media-frame is-tbd" href="#" aria-disabled="true" tabindex="-1" aria-label="Demo video (TBD)">
-            <img class="media-poster" src="assets/images/nvs_deepblending.jpg" loading="lazy" alt="Novel view synthesis comparison on Deep Blending">
-            <span class="play-badge">
-              <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l11-6.5-11-6.5z"/></svg>
-              Video: TBD
-            </span>
-          </a>
+        <figure class="figure media-card reveal zoomable" data-caption="Novel view synthesis. GT vs. 3DGS vs. density-control baselines vs. ACD-GS on Deep Blending. ACD-GS removes floaters in empty regions (e.g., the sky in Tree) and keeps sharp boundaries while using a fraction of the primitives.">
+          <img src="assets/images/deepblending_render.png" loading="lazy" alt="Novel view synthesis comparison on Deep Blending">
           <figcaption>
             <strong>Novel view synthesis.</strong> GT vs. 3DGS vs. density-control baselines vs. ACD-GS on Deep
             Blending. ACD-GS removes floaters in empty regions (e.g., the sky in <em>Tree</em>) and keeps sharp
@@ -271,14 +260,8 @@
           </figcaption>
         </figure>
 
-        <figure class="media-card reveal" style="--ar:2.6">
-          <a class="media-frame is-tbd" href="#" aria-disabled="true" tabindex="-1" aria-label="Demo video (TBD)">
-            <img class="media-poster" src="assets/images/error_maps.jpg" loading="lazy" alt="Photometric error maps and ACD-GS renders across scenes">
-            <span class="play-badge">
-              <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l11-6.5-11-6.5z"/></svg>
-              Video: TBD
-            </span>
-          </a>
+        <figure class="figure media-card reveal zoomable" data-caption="Where capacity is spent. Per-method error maps and ACD-GS renders on Aquarium, Bedroom, and Library. ACD-GS concentrates primitives along structural edges while covering planar regions with few, larger Gaussians.">
+          <img src="assets/images/error_maps.jpg" loading="lazy" alt="Photometric error maps and ACD-GS renders across scenes">
           <figcaption>
             <strong>Where capacity is spent.</strong> Per-method error maps and ACD-GS renders on Aquarium,
             Bedroom, and Library. ACD-GS concentrates primitives along structural edges while covering planar
@@ -286,14 +269,8 @@
           </figcaption>
         </figure>
 
-        <figure class="media-card reveal" style="--ar:1.78">
-          <a class="media-frame is-tbd" href="#" aria-disabled="true" tabindex="-1" aria-label="Demo video (TBD)">
-            <img class="media-poster" src="assets/images/point_density.jpg" loading="lazy" alt="Gaussian point density visualization on the Bedroom scene">
-            <span class="play-badge">
-              <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l11-6.5-11-6.5z"/></svg>
-              Video: TBD
-            </span>
-          </a>
+        <figure class="figure media-card reveal zoomable" data-caption="Primitive distribution. 3DGS densely saturates flat surfaces; ACD-GS allocates dense primitives strictly along structural edges and thin details, producing clean backgrounds with far fewer points.">
+          <img src="assets/images/point_density.jpg" loading="lazy" alt="Gaussian point density visualization on the Bedroom scene">
           <figcaption>
             <strong>Primitive distribution.</strong> 3DGS densely saturates flat surfaces; ACD-GS allocates dense
             primitives strictly along structural edges and thin details, producing clean backgrounds with far fewer
@@ -378,13 +355,13 @@
         <figcaption>Novel view synthesis on Deep Blending. Vanilla 3DGS produces floating artifacts and texture noise; ACD-GS reconstructs clean backgrounds and crisp boundaries.</figcaption>
       </figure>
 
-      <div class="two-col figures">
+      <div class="two-col figures figures-equal-height">
         <figure class="figure reveal zoomable" data-caption="Visualization of Gaussian distribution on the Bedroom scene: 3DGS, Mini-Splatting, AbsGS, GDAGS, Mip-Splatting, and ACD-GS.">
-          <img src="assets/images/point_density.jpg" width="2400" height="1350" loading="lazy" alt="Gaussian point distribution visualization across methods">
+          <img src="assets/images/point_density.jpg" width="2298" height="1350" loading="lazy" alt="Gaussian point distribution visualization across methods">
           <figcaption>Primitive distribution: ACD-GS keeps dense primitives on structural edges and few, larger ones on planar regions.</figcaption>
         </figure>
         <figure class="figure reveal zoomable" data-caption="Qualitative comparison on the large-scale outdoor scenes of Mip-NeRF 360.">
-          <img src="assets/images/nvs_mipnerf360.jpg" width="2400" height="1214" loading="lazy" alt="Qualitative comparison on Mip-NeRF 360">
+          <img src="assets/images/nvs_mipnerf360.jpg" width="2400" height="1154" loading="lazy" alt="Qualitative comparison on Mip-NeRF 360">
           <figcaption>Large-scale outdoor scenes from Mip-NeRF 360.</figcaption>
         </figure>
       </div>
@@ -426,13 +403,13 @@
       </div>
 
       <h3 class="subtitle reveal">More qualitative results</h3>
-      <div class="two-col figures">
+      <div class="figures-stacked">
         <figure class="figure reveal zoomable" data-caption="Per-method error maps and ACD-GS renders on Aquarium, Bedroom, and Library (Deep Blending).">
-          <img src="assets/images/error_maps.jpg" width="2400" height="922" loading="lazy" alt="Error maps per method on three scenes">
+          <img src="assets/images/qualitive_compare.png" width="2400" height="922" loading="lazy" alt="Error maps per method on three scenes">
           <figcaption>Error maps and renders on Deep Blending scenes.</figcaption>
         </figure>
         <figure class="figure reveal zoomable" data-caption="Error maps and rendered images of GDAGS and ACD-GS on the Aquarium scene. ACD-GS reduces residual error along structural boundaries.">
-          <img src="assets/images/observe.jpg" width="2400" height="599" loading="lazy" alt="Error maps and renders of GDAGS versus ACD-GS">
+          <img src="assets/images/observe.png" width="2400" height="599" loading="lazy" alt="Error maps and renders of GDAGS versus ACD-GS">
           <figcaption>GDAGS vs. ACD-GS: error maps and renders. ACD-GS leaves fewer high-error residuals around geometry.</figcaption>
         </figure>
       </div>
@@ -467,7 +444,7 @@
   <div class="container">
     <p class="foot-links">
       <a class="is-tbd" href="#" aria-disabled="true" tabindex="-1">arXiv (TBD)</a> ·
-      <a class="is-tbd" href="#" aria-disabled="true" tabindex="-1">Code (TBD)</a> ·
+      <a href="https://github.com/waveviewer/ACD-GS.git">Code (TBD)</a> ·
       <a href="#demos">Videos</a> ·
       <a href="#bibtex">BibTeX</a>
     </p>
