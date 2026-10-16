@@ -99,7 +99,7 @@ a:hover { text-decoration: underline; }
 .btn-dark { background: #171b23; border-color: #171b23; color: #fff; }
 .btn-dark:hover { background: #000; }
 .btn-ghost { color: var(--text); }
-.is-tbd { opacity: .55; pointer-events: none; cursor: not-allowed; }
+.is-tbd { opacity: 1; pointer-events: none; cursor: not-allowed; }
 
 /* ------------------------------ hero ---------------------------------- */
 
@@ -179,7 +179,8 @@ section[id], footer { scroll-margin-top: 80px; }
 /* ------------------------------ stats --------------------------------- */
 
 .stats {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: grid; grid-template-columns: repeat(4, minmax(180px, 1fr));
+  overflow-x: auto;
   gap: 16px; margin-top: 38px; text-align: left;
 }
 .stat {
@@ -290,6 +291,10 @@ a.media-frame:not(.is-tbd):hover .play-badge { background: var(--accent); }
 }
 .two-col > * { min-width: 0; }
 .two-col.figures { grid-template-columns: 1fr 1fr; }
+.figures-stacked { display: grid; grid-template-columns: minmax(0, 1fr); gap: 30px; margin-top: 30px; }
+.figures-stacked figcaption { text-align: center; }
+/* Match column widths to the source aspect ratios so the images align in height. */
+.two-col.figures-equal-height { grid-template-columns: 1.702222fr 2.079723fr; }
 
 /* ------------------------------ bibtex -------------------------------- */
 
