@@ -1,0 +1,28 @@
+name: ACDGS
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip>=24
+  - setuptools
+  - wheel
+  - ninja
+  - cmake
+  - packaging
+  - libstdcxx-ng>=14
+  - libgcc-ng>=14
+  - numpy<2
+  - plyfile
+  - tqdm
+  - pillow
+  - opencv
+  - joblib
+  - matplotlib
+  - jupyterlab
+  - tensorboard
+  - pip:
+      - -r requirements-torch-cu128.txt
+variables:
+  TORCH_CUDA_ARCH_LIST: "12.0"
+  FORCE_CUDA: "1"
