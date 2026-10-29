@@ -105,5 +105,25 @@ bash eval.sh
 
 ## Pre-trained Models
 
-You can download part of our Pre-trained Models in [BaiDu Cloud](https://pan.baidu.com/s/17XEEDJK69xeiq0Ti1uYH7Q?pwd=fmt7)
+You can download part of our Pre-trained Models in [BaiDu Cloud](https://pan.baidu.com/s/17XEEDJK69xeiq0Ti1uYH7Q?pwd=fmt7),after unzipping the directory should contain the following folders:
+
+```
+|---output
+    |---Aquarium-20
+    |   |---point_cloud
+    |   |   |---iteration_7000
+    |   |   |   |---point_cloud.ply
+    |   |   |---iteration_30000
+    |   |   |   |---point_cloud.ply
+    |   |---test
+    |   |   |---ours_30000
+    |   |   |   |---gt
+    |   |   |   |   |---00000.png
+    |   |   |   |   |---...
+    |   |   |   |---render
+    |   |   |   |   |---00000.png
+    |   |   |   |   |---...
+    |---Bedroom
+    |---...
+```
 
