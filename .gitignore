@@ -3,3 +3,19 @@ NeurIPS_2026_ACD_GS
 .DS_Store
 readme-dev.md
 docs/assets/videos/
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# CUDA 扩展编译产物
+build/
+*.so
+*.o
+*.a
+*.ninja
+.ninja_deps
+.ninja_log
