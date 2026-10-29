@@ -105,5 +105,5 @@ bash eval.sh
 
 ## Pre-trained Models
 
-You can download part of our Pre-trained Models in /output
+You can download part of our Pre-trained Models in [BaiDu Cloud](https://pan.baidu.com/s/17XEEDJK69xeiq0Ti1uYH7Q?pwd=fmt7)
 

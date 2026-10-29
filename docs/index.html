@@ -26,13 +26,9 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="ACD-GS: Asymmetric Curvature-aware Densification for 3D Gaussian Splatting">
 <meta property="og:description" content="~60% fewer Gaussians and storage, faster training, competitive rendering fidelity. Accepted at NeurIPS 2026.">
-<!-- EDIT-ME: use the absolute deployed URL for og:image (relative URLs are not valid for social previews) -->
-<meta property="og:image" content="https://USERNAME.github.io/ACD-GS/assets/images/og_image.jpg">
-<meta property="og:url" content="https://USERNAME.github.io/ACD-GS/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ACD-GS: Asymmetric Curvature-aware Densification for 3D Gaussian Splatting">
 <meta name="twitter:description" content="~60% fewer Gaussians and storage, faster training, competitive rendering fidelity. NeurIPS 2026.">
-<meta name="twitter:image" content="https://USERNAME.github.io/ACD-GS/assets/images/og_image.jpg">
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/style.css">
@@ -117,7 +113,7 @@
       </div>
 
       <figure class="hero-media reveal zoomable" data-caption="ACD-GS produces sparser point clouds while preserving scene structure (left). Training time vs. storage, color-coded by PSNR (right): lower storage and faster training without sacrificing quality.">
-        <img src="assets/images/teaser.jpg" width="2216" height="521" alt="Teaser: ACD-GS point cloud comparison and storage-speed-quality trade-off">
+        <img src="assets/images/teaser.png" alt="Teaser: ACD-GS point cloud comparison and storage-speed-quality trade-off" width="6000" height="1412" decoding="async">
       </figure>
       <p class="media-note reveal">ACD-GS yields sparser Gaussians while preserving scene structure, and sits in the most favorable storage–time–quality region.</p>
     </div>
@@ -125,7 +121,7 @@
 
   <!-- ================= ABSTRACT ================= -->
   <section id="abstract" class="section">
-    <div class="container narrow">
+    <div class="container">
       <p class="kicker reveal">Abstract</p>
       <h2 class="section-title reveal">Geometry-aware densification at its source</h2>
       <p class="abstract-text reveal">
@@ -183,8 +179,7 @@
 
       <figure class="figure reveal zoomable" data-caption="Overview of the ACD-GS pipeline. Curvature-Guided Asymmetric Densification utilizes second-order depth priors to penalize redundant cloning and promote boundary-aware splitting. A Multi-view Photometric Error Gating mechanism filters transient noise by enforcing cross-view residual consensus. Capacity-Constrained Adaptive Optimization dynamically regulates primitive proliferation through global quotas and lifecycle-aware pruning.">
         <picture>
-          <source srcset="assets/images/pipeline.webp" type="image/webp">
-          <img src="assets/images/pipeline.jpg" width="2600" height="1385" loading="lazy" alt="ACD-GS pipeline overview">
+          <img src="assets/images/pipeline.png" loading="lazy" alt="ACD-GS pipeline overview" width="2640" height="1485" decoding="async">
         </picture>
         <figcaption>Overview of the ACD-GS pipeline. Click to enlarge.</figcaption>
       </figure>
@@ -193,49 +188,30 @@
         <article class="card reveal">
           <div class="card-num">1</div>
           <h3>Curvature-Guided Asymmetric Densification</h3>
-          <p>
-            A robust depth-edge confidence map <i>E</i> is computed from the clipped, normalized Laplacian of the
-            rendered depth. Each visible Gaussian samples <i>E</i> at its projected center and receives
-            operation-specific gradients:
-          </p>
-          <p class="formula"><i>g</i><sub>i</sub><sup>clone</sup> = <i>g</i><sub>i</sub>(1 &minus; &alpha;<i>e</i><sub>i</sub>)<br>
-            <i>g</i><sub>i</sub><sup>split</sup> = <i>g</i><sub>i</sub>(1 + &beta;<i>e</i><sub>i</sub>)</p>
-          <p>
-            Cloning is suppressed near depth discontinuities to avoid ambiguous foreground–background duplication,
-            while splitting is amplified so boundary-crossing Gaussians refine thin structures. In smooth regions the
-            modulation reduces to the original 3DGS gradient, preserving texture-fitting capacity.
-          </p>
+          <p>A depth-edge confidence map <i>E</i> is obtained from the clipped and normalized second-order depth response. Each visible Gaussian samples <i>E</i> at its projected center, yielding <i>e</i><sub>i</sub>, which modulates its cloning and splitting gradients:</p>
+          <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Cloning and splitting gradients"><mtable columnalign="left" rowspacing="0.6em"><mtr><mtd><mrow><msubsup><mi>g</mi><mi>i</mi><mtext>clone</mtext></msubsup><mo>=</mo><msub><mi>g</mi><mi>i</mi></msub><mo>(</mo><mn>1</mn><mo>&#8722;</mo><mi>&#945;</mi><msub><mi>e</mi><mi>i</mi></msub><mo>)</mo><mo>,</mo></mrow></mtd></mtr><mtr><mtd><mrow><msubsup><mi>g</mi><mi>i</mi><mtext>split</mtext></msubsup><mo>=</mo><msub><mi>g</mi><mi>i</mi></msub><mo>(</mo><mn>1</mn><mo>+</mo><mi>&#946;</mi><msub><mi>e</mi><mi>i</mi></msub><mo>)</mo><mo>.</mo></mrow></mtd></mtr></mtable></math></div>
+          <p>Cloning is suppressed near depth discontinuities to reduce redundant duplication, while splitting is promoted to refine boundary-crossing Gaussians. In smooth regions, the original gradient is preserved.</p>
         </article>
 
         <article class="card reveal">
           <div class="card-num">2</div>
           <h3>Multi-view Photometric Error Gating</h3>
-          <p>
-            Single-view residuals are volatile under occlusion and view-dependent effects. Before each densification
-            step, <i>K</i>&nbsp;=&nbsp;8 auxiliary cameras render the scene; each Gaussian is scored by the fraction of
-            views in which its projection falls into a high-RGB-error region.
-          </p>
-          <p class="formula">candidate &nbsp;&hArr;&nbsp; <i>S</i><sub>i</sub><sup>rgb</sup> &ge; &tau;<sub>mv</sub></p>
-          <p>
-            Only cross-view-consistent candidates enter the densification pool. This filters transient photometric
-            noise and view-specific artifacts while still allocating capacity to genuinely under-reconstructed
-            texture.
-          </p>
+          <p>To filter transient photometric errors, <i>K</i>=8 auxiliary views are sampled during densification. Each Gaussian is scored by the fraction of valid views in which its projection falls within a high-RGB-error region:</p>
+          <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Multi-view photometric error score"><mrow><msubsup><mi>S</mi><mi>i</mi><mtext>rgb</mtext></msubsup><mo>=</mo><mfrac><mrow><munderover><mo>&#8721;</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>K</mi></munderover><msub><mi>v</mi><mrow><mi>i</mi><mo>,</mo><mi>k</mi></mrow></msub><msubsup><mi>e</mi><mrow><mi>i</mi><mo>,</mo><mi>k</mi></mrow><mtext>rgb</mtext></msubsup></mrow><mrow><mi>max</mi><mo>(</mo><munderover><mo>&#8721;</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>K</mi></munderover><msub><mi>v</mi><mrow><mi>i</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>,</mo><mn>1</mn><mo>)</mo></mrow></mfrac><mo>.</mo></mrow></math></div>
+          <p>A Gaussian is admitted into the densification candidate pool if</p>
+          <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Densification admission threshold"><mrow><msubsup><mi>S</mi><mi>i</mi><mtext>rgb</mtext></msubsup><mo>&#8805;</mo><msub><mi>&#964;</mi><mtext>mv</mtext></msub><mo>.</mo></mrow></math></div>
+          <p>This cross-view constraint filters view-specific noise while preserving genuinely under-reconstructed details.</p>
         </article>
 
         <article class="card reveal">
           <div class="card-num">3</div>
           <h3>Capacity-Constrained Adaptive Optimization</h3>
-          <p>
-            Instead of a fixed gradient threshold, the densification cutoff is read from the sorted gradient
-            distribution under a scene-aware growth quota <i>N</i><sub>allow</sub> = &lfloor;&mu;<i>N</i><sub>total</sub>&rfloor;
-            (&mu;&nbsp;=&nbsp;0.8%). A top-10% fallback avoids marginal candidates.
-          </p>
-          <p class="formula">&alpha;<sub>prune</sub>(<i>p</i>) = &alpha;<sub>min</sub> + (&alpha;<sub>max</sub> &minus; &alpha;<sub>min</sub>)&thinsp;<i>p</i>, &nbsp; <i>p</i> = <i>t</i>/<i>T</i></p>
-          <p>
-            The opacity pruning threshold is annealed with training progress: exploratory primitives survive early on,
-            while redundant and floating Gaussians are strictly removed near convergence.
-          </p>
+          <p>A scene-aware growth quota determines the number of eligible densification candidates:</p>
+          <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Scene-aware growth quota"><mtable columnalign="left" rowspacing="0.6em"><mtr><mtd><mrow><msub><mi>N</mi><mtext>allow</mtext></msub><mo>=</mo><mo>&#8970;</mo><mi>&#956;</mi><msub><mi>N</mi><mtext>total</mtext></msub><mo>&#8971;</mo><mo>,</mo></mrow></mtd></mtr><mtr><mtd><mrow><mi>&#956;</mi><mo>=</mo><mn>0.8</mn><mo>%</mo><mo>.</mo></mrow></mtd></mtr></mtable></math></div>
+          <p>The gradient threshold is adaptively selected from the sorted gradient distribution, with a top-10% fallback when the candidate pool is smaller than the quota.</p>
+          <p>Opacity pruning is progressively strengthened during training:</p>
+          <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Progressive opacity pruning threshold"><mtable columnalign="left" rowspacing="0.6em"><mtr><mtd><mrow><msub><mi>&#945;</mi><mtext>prune</mtext></msub><mo>(</mo><mi>p</mi><mo>)</mo><mo>=</mo><msub><mi>&#945;</mi><mtext>min</mtext></msub><mo>+</mo><mo>(</mo><msub><mi>&#945;</mi><mtext>max</mtext></msub><mo>&#8722;</mo><msub><mi>&#945;</mi><mtext>min</mtext></msub><mo>)</mo><mi>p</mi><mo>,</mo></mrow></mtd></mtr><mtr><mtd><mrow><mi>p</mi><mo>=</mo><mfrac><mi>t</mi><mi>T</mi></mfrac><mo>.</mo></mrow></mtd></mtr></mtable></math></div>
+          <p>This preserves potentially useful Gaussians during early optimization while removing redundant and low-opacity primitives toward convergence.</p>
         </article>
       </div>
     </div>
@@ -252,7 +228,7 @@
 
       <div class="demos">
         <figure class="figure media-card reveal zoomable" data-caption="Novel view synthesis. GT vs. 3DGS vs. density-control baselines vs. ACD-GS on Deep Blending. ACD-GS removes floaters in empty regions (e.g., the sky in Tree) and keeps sharp boundaries while using a fraction of the primitives.">
-          <img src="assets/images/deepblending_render.png" loading="lazy" alt="Novel view synthesis comparison on Deep Blending">
+          <img src="assets/images/deepblending_render.png" loading="lazy" alt="Novel view synthesis comparison on Deep Blending" width="3840" height="1622" decoding="async">
           <figcaption>
             <strong>Novel view synthesis.</strong> GT vs. 3DGS vs. density-control baselines vs. ACD-GS on Deep
             Blending. ACD-GS removes floaters in empty regions (e.g., the sky in <em>Tree</em>) and keeps sharp
@@ -261,7 +237,7 @@
         </figure>
 
         <figure class="figure media-card reveal zoomable" data-caption="Where capacity is spent. Per-method error maps and ACD-GS renders on Aquarium, Bedroom, and Library. ACD-GS concentrates primitives along structural edges while covering planar regions with few, larger Gaussians.">
-          <img src="assets/images/error_maps.jpg" loading="lazy" alt="Photometric error maps and ACD-GS renders across scenes">
+          <img src="assets/images/qualitive_compare.png" loading="lazy" alt="Photometric error maps and ACD-GS renders across scenes" width="2771" height="1065" decoding="async">
           <figcaption>
             <strong>Where capacity is spent.</strong> Per-method error maps and ACD-GS renders on Aquarium,
             Bedroom, and Library. ACD-GS concentrates primitives along structural edges while covering planar
@@ -270,7 +246,7 @@
         </figure>
 
         <figure class="figure media-card reveal zoomable" data-caption="Primitive distribution. 3DGS densely saturates flat surfaces; ACD-GS allocates dense primitives strictly along structural edges and thin details, producing clean backgrounds with far fewer points.">
-          <img src="assets/images/point_density.jpg" loading="lazy" alt="Gaussian point density visualization on the Bedroom scene">
+          <img src="assets/images/point_number.png" loading="lazy" alt="Gaussian point density visualization on the Bedroom scene" width="6000" height="3375" decoding="async">
           <figcaption>
             <strong>Primitive distribution.</strong> 3DGS densely saturates flat surfaces; ACD-GS allocates dense
             primitives strictly along structural edges and thin details, producing clean backgrounds with far fewer
@@ -292,7 +268,7 @@
         Mean per dataset. ACD-GS uses the smallest model and trains fastest on all three benchmarks, without any
         post-hoc compression or quantization.
       </p>
-      <div class="table-wrap reveal">
+      <div class="table-wrap reveal" tabindex="0" role="region" aria-label="Scrollable research results table">
         <table class="data-table">
           <thead>
             <tr>
@@ -319,10 +295,10 @@
         </table>
       </div>
 
-      <div class="two-col">
+      <div class="results-block">
         <div>
           <h3 class="subtitle reveal">Rendering quality on Deep Blending (mean over 5 scenes)</h3>
-          <div class="table-wrap reveal">
+          <div class="table-wrap reveal" tabindex="0" role="region" aria-label="Scrollable research results table">
             <table class="data-table compact">
               <thead>
                 <tr><th class="th-method">Method</th><th>PSNR &uarr;</th><th>SSIM &uarr;</th><th>LPIPS &darr;</th><th>Size (MB) &darr;</th></tr>
@@ -340,28 +316,19 @@
           </div>
           <p class="table-note reveal">Best PSNR and SSIM among all compared methods, with roughly 2.4&times; smaller storage than 3DGS.</p>
         </div>
-        <div>
-          <h3 class="subtitle reveal">Storage vs. PSNR (averaged over 3 datasets)</h3>
-          <figure class="figure small reveal zoomable" data-caption="Average storage vs. average PSNR over Deep Blending, Mip-NeRF 360, and Tanks &amp; Temples. ACD-GS occupies the most favorable region of the trade-off space.">
-            <img src="assets/images/storage_psnr.jpg" width="872" height="547" loading="lazy" alt="Average storage versus PSNR scatter plot">
-          </figure>
-          <p class="table-note reveal">ACD-GS sits in the most favorable region of the quality–compactness trade-off.</p>
-        </div>
+
       </div>
 
       <h3 class="subtitle reveal">Qualitative comparison</h3>
       <figure class="figure reveal zoomable" data-caption="Qualitative comparison of novel view synthesis on the Deep Blending dataset: GT, 3DGS, AbsGS, GDAGS, and ACD-GS (Aquarium, Tree, Poche).">
-        <img src="assets/images/nvs_deepblending.jpg" width="2400" height="1014" loading="lazy" alt="Qualitative novel view synthesis comparison on Deep Blending">
+        <img src="assets/images/deepblending_render.png" loading="lazy" alt="Qualitative novel view synthesis comparison on Deep Blending" width="3840" height="1622" decoding="async">
         <figcaption>Novel view synthesis on Deep Blending. Vanilla 3DGS produces floating artifacts and texture noise; ACD-GS reconstructs clean backgrounds and crisp boundaries.</figcaption>
       </figure>
 
-      <div class="two-col figures figures-equal-height">
-        <figure class="figure reveal zoomable" data-caption="Visualization of Gaussian distribution on the Bedroom scene: 3DGS, Mini-Splatting, AbsGS, GDAGS, Mip-Splatting, and ACD-GS.">
-          <img src="assets/images/point_density.jpg" width="2298" height="1350" loading="lazy" alt="Gaussian point distribution visualization across methods">
-          <figcaption>Primitive distribution: ACD-GS keeps dense primitives on structural edges and few, larger ones on planar regions.</figcaption>
-        </figure>
+      <div class="figures-stacked">
+
         <figure class="figure reveal zoomable" data-caption="Qualitative comparison on the large-scale outdoor scenes of Mip-NeRF 360.">
-          <img src="assets/images/nvs_mipnerf360.jpg" width="2400" height="1154" loading="lazy" alt="Qualitative comparison on Mip-NeRF 360">
+          <img src="assets/images/mipnerf_render.png" loading="lazy" alt="Qualitative comparison on Mip-NeRF 360" width="6000" height="3035" decoding="async">
           <figcaption>Large-scale outdoor scenes from Mip-NeRF 360.</figcaption>
         </figure>
       </div>
@@ -369,7 +336,7 @@
       <div class="two-col">
         <div>
           <h3 class="subtitle reveal">Ablation on Deep Blending</h3>
-          <div class="table-wrap reveal">
+          <div class="table-wrap reveal" tabindex="0" role="region" aria-label="Scrollable research results table">
             <table class="data-table compact">
               <thead>
                 <tr><th>CAD</th><th>MPG</th><th>CAO</th><th>Size (MB) &darr;</th><th>PSNR &uarr;</th><th>SSIM &uarr;</th></tr>
@@ -385,31 +352,36 @@
           <p class="table-note reveal">CAD: Curvature-Guided Asymmetric Densification; MPG: Multi-view Photometric Gating; CAO: Capacity-Constrained Adaptive Optimization.</p>
         </div>
         <div>
-          <h3 class="subtitle reveal">Sensitivity to &alpha; and &beta;</h3>
-          <div class="table-wrap reveal">
-            <table class="data-table compact">
+          <h3 class="subtitle reveal" id="views-quota-title">Sensitivity to the number of auxiliary views <i>K</i> and quota ratio &mu;</h3>
+          <div class="table-wrap reveal" tabindex="0" role="region" aria-labelledby="views-quota-title">
+            <table class="data-table compact" id="tab-views-quota" aria-labelledby="views-quota-title">
               <thead>
-                <tr><th>Setting</th><th>PSNR &uarr;</th><th>SSIM &uarr;</th><th>Size (MB) &darr;</th><th>Points &darr;</th></tr>
+                <tr><th scope="col" class="th-method">Setting</th><th scope="col">PSNR &uarr;</th><th scope="col">SSIM &uarr;</th><th scope="col">LPIPS &darr;</th><th scope="col">Points &darr;</th><th scope="col">Size (MB) &darr;</th></tr>
               </thead>
               <tbody>
-                <tr><td>&alpha;=0.5, &beta;=1.0</td><td>25.31</td><td>0.8395</td><td>247.4</td><td>1.05M</td></tr>
-                <tr class="ours"><td>&alpha;=0.8, &beta;=1.5 (default)</td><td>25.59</td><td>0.8451</td><td>151.9</td><td>0.64M</td></tr>
-                <tr><td>&alpha;=1.0, &beta;=2.5</td><td>25.53</td><td>0.8409</td><td>272.3</td><td>1.15M</td></tr>
+                <tr><td class="th-method"><i>K</i>=4</td><td>25.3380</td><td>0.8432</td><td>0.2393</td><td><strong>550,173</strong></td><td><strong>136.44</strong></td></tr>
+                <tr><td class="th-method"><i>K</i>=8</td><td><strong>25.5914</strong></td><td><strong>0.8450</strong></td><td><strong>0.2363</strong></td><td>642,045</td><td>151.85</td></tr>
+                <tr><td class="th-method"><i>K</i>=12</td><td>25.3605</td><td>0.8440</td><td>0.2390</td><td>661,947</td><td>156.88</td></tr>
+              </tbody>
+              <tbody>
+                <tr><td class="th-method">&mu;=0.004</td><td>25.5145</td><td>0.8444</td><td><strong>0.2363</strong></td><td><strong>641,737</strong></td><td><strong>151.78</strong></td></tr>
+                <tr><td class="th-method">&mu;=0.008</td><td><strong>25.5913</strong></td><td><strong>0.8450</strong></td><td><strong>0.2363</strong></td><td>642,044</td><td>151.85</td></tr>
+                <tr><td class="th-method">&mu;=0.012</td><td>25.4211</td><td>0.8432</td><td>0.2372</td><td>642,241</td><td>151.90</td></tr>
               </tbody>
             </table>
           </div>
-          <p class="table-note reveal">The default setting offers the best quality–compactness trade-off.</p>
+          <p class="table-note reveal">Bold values indicate the best result within each parameter group.</p>
         </div>
       </div>
 
       <h3 class="subtitle reveal">More qualitative results</h3>
       <div class="figures-stacked">
         <figure class="figure reveal zoomable" data-caption="Per-method error maps and ACD-GS renders on Aquarium, Bedroom, and Library (Deep Blending).">
-          <img src="assets/images/qualitive_compare.png" width="2400" height="922" loading="lazy" alt="Error maps per method on three scenes">
+          <img src="assets/images/qualitive_compare.png" loading="lazy" alt="Error maps per method on three scenes" width="2771" height="1065" decoding="async">
           <figcaption>Error maps and renders on Deep Blending scenes.</figcaption>
         </figure>
         <figure class="figure reveal zoomable" data-caption="Error maps and rendered images of GDAGS and ACD-GS on the Aquarium scene. ACD-GS reduces residual error along structural boundaries.">
-          <img src="assets/images/observe.png" width="2400" height="599" loading="lazy" alt="Error maps and renders of GDAGS versus ACD-GS">
+          <img src="assets/images/observe.png" loading="lazy" alt="Error maps and renders of GDAGS versus ACD-GS" width="5184" height="1294" decoding="async">
           <figcaption>GDAGS vs. ACD-GS: error maps and renders. ACD-GS leaves fewer high-error residuals around geometry.</figcaption>
         </figure>
       </div>
@@ -444,8 +416,8 @@
   <div class="container">
     <p class="foot-links">
       <a class="is-tbd" href="#" aria-disabled="true" tabindex="-1">arXiv (TBD)</a> ·
-      <a href="https://github.com/waveviewer/ACD-GS.git">Code (TBD)</a> ·
-      <a href="#demos">Videos</a> ·
+      <a href="https://github.com/waveviewer/ACD-GS.git">Code</a> ·
+      <a href="https://www.bilibili.com/video/BV1Gsx76gE9a/?vd_source=8c77d6be75d9d2305cd6c9c236fe4830">video</a> ·
       <a href="#bibtex">BibTeX</a>
     </p>
     <p class="foot-contact">
@@ -461,7 +433,7 @@
   </div>
 </footer>
 
-<dialog id="lightbox" class="lightbox">
+<dialog id="lightbox" class="lightbox" aria-label="Enlarged research figure" aria-describedby="lb-cap">
   <button class="lb-close" aria-label="Close image">&times;</button>
   <img id="lb-img" alt="">
   <p id="lb-cap"></p>

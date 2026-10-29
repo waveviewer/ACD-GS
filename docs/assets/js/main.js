@@ -56,13 +56,26 @@
   var lbImg = document.getElementById("lb-img");
   var lbCap = document.getElementById("lb-cap");
   document.querySelectorAll(".zoomable").forEach(function (fig) {
-    fig.addEventListener("click", function () {
+    fig.tabIndex = 0;
+    fig.setAttribute("role", "button");
+    fig.setAttribute("aria-haspopup", "dialog");
+    var preview = fig.querySelector("img");
+    if (preview) fig.setAttribute("aria-label", "Enlarge image: " + preview.alt);
+    function openFigure() {
       var img = fig.querySelector("img");
       if (!img || !lightbox || typeof lightbox.showModal !== "function") return;
       lbImg.src = img.currentSrc || img.src;
       lbImg.alt = img.alt || "";
-      lbCap.textContent = fig.dataset.caption || "";
+      var caption = fig.querySelector("figcaption");
+      lbCap.textContent = fig.dataset.caption || (caption ? caption.textContent.trim() : "");
       lightbox.showModal();
+    }
+    fig.addEventListener("click", openFigure);
+    fig.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openFigure();
+      }
     });
   });
   if (lightbox) {
