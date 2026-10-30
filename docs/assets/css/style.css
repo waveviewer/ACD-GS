@@ -91,15 +91,14 @@ a:hover { text-decoration: underline; }
   transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
   white-space: nowrap;
 }
-.btn:hover { text-decoration: none; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(16, 26, 54, .10); }
+.btn:hover {
+  text-decoration: none; transform: translateY(-1px);
+  background: var(--accent-soft); border-color: rgba(36, 87, 214, .35);
+  box-shadow: 0 8px 20px rgba(16, 26, 54, .10);
+}
 .btn svg { flex: none; }
 .btn-sm { padding: 7px 13px; font-size: .85rem; }
-.btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-.btn-primary:hover { background: #1d4ac0; }
-.btn-dark { background: #171b23; border-color: #171b23; color: #fff; }
-.btn-dark:hover { background: #000; }
-.btn-ghost { color: var(--text); }
-.is-tbd { opacity: 1; pointer-events: none; cursor: not-allowed; }
+.is-tbd { opacity: .5; pointer-events: none; cursor: not-allowed; }
 
 /* ------------------------------ hero ---------------------------------- */
 

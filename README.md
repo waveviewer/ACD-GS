@@ -105,7 +105,7 @@ bash eval.sh
 
 ## Pre-trained Models
 
-You can download part of our Pre-trained Models in [BaiDu Cloud](https://pan.baidu.com/s/17XEEDJK69xeiq0Ti1uYH7Q?pwd=fmt7),after unzipping the directory should contain the following folders:
+You can download part of our pre-trained models from [Google Drive](https://drive.google.com/file/d/13BWHSHNnzLRCY012xi7SmSsbFvSPlewB/view?usp=sharing) or [Baidu Cloud](https://pan.baidu.com/s/17XEEDJK69xeiq0Ti1uYH7Q?pwd=fmt7). After unzipping, the directory should contain the following folders:
 
 ```
 |---output
