@@ -100,7 +100,7 @@
       </div>
 
       <figure class="hero-media reveal zoomable" data-caption="ACD-GS produces sparser point clouds while preserving scene structure (left). Training time vs. storage, color-coded by PSNR (right): lower storage and faster training without sacrificing quality.">
-        <img src="assets/images/teaser.png" alt="Teaser: ACD-GS point cloud comparison and storage-speed-quality trade-off" width="6000" height="1412" decoding="async">
+        <img src="assets/images/teaser.webp" alt="Teaser: ACD-GS point cloud comparison and storage-speed-quality trade-off" width="2400" height="559" decoding="async">
       </figure>
       <p class="media-note reveal">ACD-GS yields sparser Gaussians while preserving scene structure, and sits in the most favorable storage–time–quality region.</p>
     </div>
@@ -166,7 +166,7 @@
 
       <figure class="figure reveal zoomable" data-caption="Overview of the ACD-GS pipeline. Curvature-Guided Asymmetric Densification utilizes second-order depth priors to penalize redundant cloning and promote boundary-aware splitting. A Multi-view Photometric Error Gating mechanism filters transient noise by enforcing cross-view residual consensus. Capacity-Constrained Adaptive Optimization dynamically regulates primitive proliferation through global quotas and lifecycle-aware pruning.">
         <picture>
-          <img src="assets/images/pipeline.png" loading="lazy" alt="ACD-GS pipeline overview" width="2640" height="1485" decoding="async">
+          <img src="assets/images/pipeline.webp" loading="lazy" alt="ACD-GS pipeline overview" width="2640" height="1485" decoding="async">
         </picture>
         <figcaption>Overview of the ACD-GS pipeline. Click to enlarge.</figcaption>
       </figure>
@@ -215,7 +215,7 @@
 
       <div class="demos">
         <!-- <figure class="figure media-card reveal zoomable" data-caption="Novel view synthesis. GT vs. 3DGS vs. density-control baselines vs. ACD-GS on Deep Blending. ACD-GS removes floaters in empty regions (e.g., the sky in Tree) and keeps sharp boundaries while using a fraction of the primitives.">
-          <img src="assets/images/deepblending_render.png" loading="lazy" alt="Novel view synthesis comparison on Deep Blending" width="3840" height="1622" decoding="async">
+          <img src="assets/images/deepblending_render.webp" loading="lazy" alt="Novel view synthesis comparison on Deep Blending" width="2800" height="1183" decoding="async">
           <figcaption>
             <strong>Novel view synthesis.</strong> GT vs. 3DGS vs. density-control baselines vs. ACD-GS on Deep
             Blending. ACD-GS removes floaters in empty regions (e.g., the sky in <em>Tree</em>) and keeps sharp
@@ -224,7 +224,7 @@
         </figure> -->
 
         <figure class="figure media-card reveal zoomable" data-caption="Where capacity is spent. Per-method error maps and ACD-GS renders on Aquarium, Bedroom, and Library. ACD-GS concentrates primitives along structural edges while covering planar regions with few, larger Gaussians.">
-          <img src="assets/images/qualitive_compare.png" loading="lazy" alt="Photometric error maps and ACD-GS renders across scenes" width="2771" height="1065" decoding="async">
+          <img src="assets/images/qualitive_compare.webp" loading="lazy" alt="Photometric error maps and ACD-GS renders across scenes" width="2771" height="1065" decoding="async">
           <figcaption>
             <strong>Where capacity is spent.</strong> Per-method error maps and ACD-GS renders on Aquarium,
             Bedroom, and Library. ACD-GS concentrates primitives along structural edges while covering planar
@@ -233,7 +233,7 @@
         </figure>
 
         <figure class="figure media-card reveal zoomable" data-caption="Primitive distribution. 3DGS densely saturates flat surfaces; ACD-GS allocates dense primitives strictly along structural edges and thin details, producing clean backgrounds with far fewer points.">
-          <img src="assets/images/point_number.png" loading="lazy" alt="Gaussian point density visualization on the Bedroom scene" width="6000" height="3375" decoding="async">
+          <img src="assets/images/point_number.webp" loading="lazy" alt="Gaussian point density visualization on the Bedroom scene" width="2800" height="1575" decoding="async">
           <figcaption>
             <strong>Primitive distribution.</strong> 3DGS densely saturates flat surfaces; ACD-GS allocates dense
             primitives strictly along structural edges and thin details, producing clean backgrounds with far fewer
@@ -308,14 +308,14 @@
 
       <h3 class="subtitle reveal">Qualitative comparison</h3>
       <figure class="figure reveal zoomable" data-caption="Qualitative comparison of novel view synthesis on the Deep Blending dataset: GT, 3DGS, AbsGS, GDAGS, and ACD-GS (Aquarium, Tree, Poche).">
-        <img src="assets/images/deepblending_render.png" loading="lazy" alt="Qualitative novel view synthesis comparison on Deep Blending" width="3840" height="1622" decoding="async">
+        <img src="assets/images/deepblending_render.webp" loading="lazy" alt="Qualitative novel view synthesis comparison on Deep Blending" width="2800" height="1183" decoding="async">
         <figcaption>Novel view synthesis on Deep Blending. Vanilla 3DGS produces floating artifacts and texture noise; ACD-GS reconstructs clean backgrounds and crisp boundaries.</figcaption>
       </figure>
 
       <div class="figures-stacked">
 
         <figure class="figure reveal zoomable" data-caption="Qualitative comparison on the large-scale outdoor scenes of Mip-NeRF 360.">
-          <img src="assets/images/mipnerf_render.png" loading="lazy" alt="Qualitative comparison on Mip-NeRF 360" width="6000" height="3035" decoding="async">
+          <img src="assets/images/mipnerf_render.webp" loading="lazy" alt="Qualitative comparison on Mip-NeRF 360" width="2800" height="1417" decoding="async">
           <figcaption>Large-scale outdoor scenes from Mip-NeRF 360.</figcaption>
         </figure>
       </div>
@@ -364,11 +364,11 @@
       <h3 class="subtitle reveal">More qualitative results</h3>
       <div class="figures-stacked">
         <!-- <figure class="figure reveal zoomable" data-caption="Per-method error maps and ACD-GS renders on Aquarium, Bedroom, and Library (Deep Blending).">
-          <img src="assets/images/qualitive_compare.png" loading="lazy" alt="Error maps per method on three scenes" width="2771" height="1065" decoding="async">
+          <img src="assets/images/qualitive_compare.webp" loading="lazy" alt="Error maps per method on three scenes" width="2771" height="1065" decoding="async">
           <figcaption>Error maps and renders on Deep Blending scenes.</figcaption>
         </figure> -->
         <figure class="figure reveal zoomable" data-caption="Error maps and rendered images of GDAGS and ACD-GS on the Aquarium scene. ACD-GS reduces residual error along structural boundaries.">
-          <img src="assets/images/observe.png" loading="lazy" alt="Error maps and renders of GDAGS versus ACD-GS" width="5184" height="1294" decoding="async">
+          <img src="assets/images/observe.webp" loading="lazy" alt="Error maps and renders of GDAGS versus ACD-GS" width="2800" height="699" decoding="async">
           <figcaption>GDAGS vs. ACD-GS: error maps and renders. ACD-GS leaves fewer high-error residuals around geometry.</figcaption>
         </figure>
       </div>
